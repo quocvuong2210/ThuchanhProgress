@@ -1,1 +1,68 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package Application;
+
+/**
+ *
+ * @author nguye
+ */
+
+    import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class test1 {
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("Linear Equation Solver");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(300, 200);
+        frame.setLayout(new GridLayout(4, 2, 5, 5));
+        
+        JLabel labelA = new JLabel("Coefficient a:");
+        JTextField textFieldA = new JTextField();
+        JLabel labelB = new JLabel("Coefficient b:");
+        JTextField textFieldB = new JTextField();
+        JButton solveButton = new JButton("Solve");
+        JLabel resultLabel = new JLabel("Solution:");
+        JTextField resultField = new JTextField();
+        resultField.setEditable(false);
+        
+        solveButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    double a = Double.parseDouble(textFieldA.getText());
+                    double b = Double.parseDouble(textFieldB.getText());
+                    
+                    if (a == 0) {
+                        if (b == 0) {
+                            resultField.setText("Infinite solutions");
+                        } else {
+                            resultField.setText("No solution");
+                        }
+                    } else {
+                        double x = -b / a;
+                        resultField.setText(String.valueOf(x));
+                    }
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(frame, "Please enter valid numbers", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+        
+        frame.add(labelA);
+        frame.add(textFieldA);
+        frame.add(labelB);
+        frame.add(textFieldB);
+        frame.add(solveButton);
+        frame.add(resultLabel);
+        frame.add(resultField);
+        
+        frame.setVisible(true);
+    }
+}
+
 
