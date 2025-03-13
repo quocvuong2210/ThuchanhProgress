@@ -1,1 +1,69 @@
 
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class Sprint extends JFrame {
+    private JTextField txtSoDau, txtSoCuoi, txtThanhTien;
+    private JButton btnTinhTien;
+
+    public Sprint() {
+        setTitle("Tính Tiền Nước");
+        setSize(300, 200);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+        
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(4, 2, 5, 5));
+        
+        panel.add(new JLabel("Số đầu:"));
+        txtSoDau = new JTextField();
+        panel.add(txtSoDau);
+        
+        panel.add(new JLabel("Số cuối:"));
+        txtSoCuoi = new JTextField();
+        panel.add(txtSoCuoi);
+        
+        panel.add(new JLabel("Thành tiền:"));
+        txtThanhTien = new JTextField();
+        txtThanhTien.setEditable(false);
+        panel.add(txtThanhTien);
+        
+        btnTinhTien = new JButton("Tính tiền");
+        panel.add(btnTinhTien);
+        
+        btnTinhTien.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                tinhThanhTien();
+            }
+        });
+        
+        add(panel);
+    }
+    
+    private void tinhThanhTien() {
+        try {
+            int soDau = Integer.parseInt(txtSoDau.getText());
+            int soCuoi = Integer.parseInt(txtSoCuoi.getText());
+            
+            if (soDau > soCuoi) {
+                JOptionPane.showMessageDialog(this, "Số đầu không thể lớn hơn số cuối!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
+            int soTieuThu = soCuoi - soDau;
+            double thanhTien = soTieuThu * 10000;
+            txtThanhTien.setText(String.format("%.2f", thanhTien));
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập số hợp lệ!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            new TEST().setVisible(true);
+        });
+    }
+}
