@@ -1,1 +1,66 @@
 
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class test7 extends JFrame {
+    private JTextField txtA, txtB;
+    private JButton btnSwap, btnExit;
+
+    public test7() {
+        setTitle("Đảo Ngược Hai Số");
+        setSize(350, 200);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setLocationRelativeTo(null); // Căn giữa màn hình
+        setLayout(new GridLayout(3, 2, 10, 10));
+
+        // Tạo các thành phần giao diện
+        add(new JLabel("🔢 Nhập số a:"));
+        txtA = new JTextField();
+        add(txtA);
+
+        add(new JLabel("🔁 Nhập số b:"));
+        txtB = new JTextField();
+        add(txtB);
+
+        btnSwap = new JButton("Đảo Ngược 🔄");
+        btnExit = new JButton("Thoát ❌");
+
+        add(btnSwap);
+        add(btnExit);
+
+       
+        btnSwap.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    String tempA = txtA.getText();
+                    String tempB = txtB.getText();
+
+                    if (tempA.isEmpty() || tempB.isEmpty()) {
+                        JOptionPane.showMessageDialog(null, "⚠️ Vui lòng nhập cả hai số!", "Lỗi nhập liệu", JOptionPane.WARNING_MESSAGE);
+                        return;
+                    }
+
+                    txtA.setText(tempB);
+                    txtB.setText(tempA);
+
+                    JOptionPane.showMessageDialog(null, "✅ Đã hoán đổi số a và b!", "Thành công", JOptionPane.INFORMATION_MESSAGE);
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, "⚠️ Lỗi không xác định!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+
+       
+        btnExit.addActionListener(e -> System.exit(0));
+
+        setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        new test7();
+    }
+}
+
