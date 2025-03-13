@@ -1,14 +1,13 @@
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Sprint extends JFrame {
+public class Sprint6 extends JFrame {
     private JTextField txtSoDau, txtSoCuoi, txtThanhTien;
     private JButton btnTinhTien;
 
-    public Sprint() {
+    public Sprint6() {
         setTitle("Tính Tiền Nước");
         setSize(300, 200);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -63,7 +62,7 @@ public class Sprint extends JFrame {
     
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            new TEST().setVisible(true);
+            new Sprint6().setVisible(true);
         });
     }
 }
