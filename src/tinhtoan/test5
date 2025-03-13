@@ -1,1 +1,62 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class Sprint5 extends JFrame {
+    private JTextField txtSoLuong, txtDonGia, txtThanhTien;
+    private JButton btnTinhTien;
+
+    public Sprint5() {
+        setTitle("Tính Thành Tiền");
+        setSize(300, 200);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+        
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(4, 2, 5, 5));
+        
+        panel.add(new JLabel("Số lượng:"));
+        txtSoLuong = new JTextField();
+        panel.add(txtSoLuong);
+        
+        panel.add(new JLabel("Đơn giá:"));
+        txtDonGia = new JTextField();
+        panel.add(txtDonGia);
+        
+        panel.add(new JLabel("Thành tiền:"));
+        txtThanhTien = new JTextField();
+        txtThanhTien.setEditable(false);
+        panel.add(txtThanhTien);
+        
+        btnTinhTien = new JButton("Tính tiền");
+        panel.add(btnTinhTien);
+        
+        btnTinhTien.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                tinhThanhTien();
+            }
+        });
+        
+        add(panel);
+    }
+    
+    private void tinhThanhTien() {
+        try {
+            int soLuong = Integer.parseInt(txtSoLuong.getText());
+            double donGia = Double.parseDouble(txtDonGia.getText());
+            double thanhTien = soLuong * donGia;
+            txtThanhTien.setText(String.format("%.2f", thanhTien));
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập số hợp lệ!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            new Sprint5().setVisible(true);
+        });
+    }
+}
 
