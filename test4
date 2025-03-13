@@ -1,1 +1,52 @@
+package ahihi;
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+public class Test4 {
+    private JFrame frame;
+    private JTextField num1Field, num2Field;
+    private JLabel resultLabel;
+
+    public Test4() {
+        frame = new JFrame("Tim So Nho Nhat");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(300, 200);
+        frame.setLayout(new GridLayout(4, 2));
+        
+        frame.add(new JLabel("Nhap so thu nhat: "));
+        num1Field = new JTextField();
+        frame.add(num1Field);
+        
+        frame.add(new JLabel("Nhap so thu hai: "));
+        num2Field = new JTextField();
+        frame.add(num2Field);
+        
+        JButton findMinButton = new JButton("Tim Min");
+        frame.add(findMinButton);
+        
+        resultLabel = new JLabel("Ket qua: ");
+        frame.add(resultLabel);
+        
+        findMinButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    int num1 = Integer.parseInt(num1Field.getText());
+                    int num2 = Integer.parseInt(num2Field.getText());
+                    int min = Math.min(num1, num2);
+                    resultLabel.setText("Ket qua: " + min);
+                } catch (NumberFormatException ex) {
+                    resultLabel.setText("Vui long nhap so hop le!");
+                }
+            }
+        });
+        
+        frame.setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        new Test4();
+    }
+}
 
