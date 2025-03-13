@@ -1,1 +1,69 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class DivisionCheckGUI extends JFrame {
+    private JTextField txtA, txtB;
+    private JLabel lblResult;
+    private JButton btnCheck, btnExit;
+
+    public DivisionCheckGUI() {
+        setTitle("Kiểm tra chia hết");
+        setSize(350, 200);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setLocationRelativeTo(null); // Căn giữa màn hình
+        setLayout(new GridLayout(4, 2, 10, 10));
+
+        // Tạo các thành phần giao diện
+        add(new JLabel("🔢 Nhập số a:"));
+        txtA = new JTextField();
+        add(txtA);
+
+        add(new JLabel("➗ Nhập số b:"));
+        txtB = new JTextField();
+        add(txtB);
+
+        lblResult = new JLabel("🔍 Kết quả: ", SwingConstants.CENTER);
+        lblResult.setForeground(Color.BLUE);
+        add(lblResult);
+
+        btnCheck = new JButton("Kiểm tra ✅");
+        btnExit = new JButton("Thoát ❌");
+
+        add(btnCheck);
+        add(btnExit);
+
+        // Sự kiện nút "Kiểm tra"
+        btnCheck.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    int a = Integer.parseInt(txtA.getText());
+                    int b = Integer.parseInt(txtB.getText());
+
+                    if (b == 0) {
+                        lblResult.setText("⚠️ Không thể chia cho 0!");
+                    } else if (a % b == 0) {
+                        lblResult.setText("✅ " + a + " chia hết cho " + b);
+                    } else {
+                        lblResult.setText("❌ " + a + " không chia hết cho " + b);
+                    }
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(null, "⚠️ Vui lòng nhập số hợp lệ!", "Lỗi nhập liệu", JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        });
+
+        // Sự kiện nút "Thoát"
+        btnExit.addActionListener(e -> System.exit(0));
+
+        setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        new DivisionCheckGUI();
+    }
+}
+
 
