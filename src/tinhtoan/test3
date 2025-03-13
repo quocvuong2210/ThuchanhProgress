@@ -1,1 +1,52 @@
+package javaapplication46;
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+public class Sprint3 {
+    private JFrame frame;
+    private JTextField num1Field, num2Field;
+    private JLabel resultLabel;
+
+    public Sprint3() {
+        frame = new JFrame("May Tinh Phep Nhan");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(300, 200);
+        frame.setLayout(new GridLayout(4, 2));
+        
+        frame.add(new JLabel("Nhap so thu nhat: "));
+        num1Field = new JTextField();
+        frame.add(num1Field);
+        
+        frame.add(new JLabel("Nhap so thu hai: "));
+        num2Field = new JTextField();
+        frame.add(num2Field);
+        
+        JButton multiplyButton = new JButton("Nhan");
+        frame.add(multiplyButton);
+        
+        resultLabel = new JLabel("Ket qua: ");
+        frame.add(resultLabel);
+        
+        multiplyButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    double num1 = Double.parseDouble(num1Field.getText());
+                    double num2 = Double.parseDouble(num2Field.getText());
+                    double result = num1 * num2;
+                    resultLabel.setText("Ket qua: " + result);
+                } catch (NumberFormatException ex) {
+                    resultLabel.setText("Vui long nhap so hop le!");
+                }
+            }
+        });
+        
+        frame.setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        new Sprint3();
+    }
+}
 
