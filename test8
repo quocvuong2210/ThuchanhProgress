@@ -1,1 +1,84 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class test8 extends JFrame {
+    private JTextField txtA, txtB, txtResult;
+    private JButton btnCalculate, btnExit;
+
+    public test8() {
+        setTitle("Tính BSCNN");
+        setSize(350, 200);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setLocationRelativeTo(null); // Căn giữa màn hình
+        setLayout(new GridLayout(4, 2, 10, 10));
+
+    
+        add(new JLabel("🔢 Nhập số a:"));
+        txtA = new JTextField();
+        add(txtA);
+
+        add(new JLabel("🔢 Nhập số b:"));
+        txtB = new JTextField();
+        add(txtB);
+
+        add(new JLabel("📌 BSCNN:"));
+        txtResult = new JTextField();
+        txtResult.setEditable(false);
+        txtResult.setBackground(Color.LIGHT_GRAY);
+        add(txtResult);
+
+        btnCalculate = new JButton("Tính BSCNN ✅");
+        btnExit = new JButton("Thoát ❌");
+
+        add(btnCalculate);
+        add(btnExit);
+
+        
+        btnCalculate.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    int a = Integer.parseInt(txtA.getText());
+                    int b = Integer.parseInt(txtB.getText());
+
+                    if (a <= 0 || b <= 0) {
+                        JOptionPane.showMessageDialog(null, "⚠️ Vui lòng nhập số nguyên dương!", "Lỗi nhập liệu", JOptionPane.WARNING_MESSAGE);
+                    } else {
+                        int lcm = findLCM(a, b);
+                        txtResult.setText(String.valueOf(lcm));
+                    }
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(null, "⚠️ Vui lòng nhập số hợp lệ!", "Lỗi", JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        });
+
+      
+        btnExit.addActionListener(e -> System.exit(0));
+
+        setVisible(true);
+    }
+
+    private int findLCM(int a, int b) {
+        return (a * b) / findGCD(a, b);
+    }
+
+    
+    private int findGCD(int a, int b) {
+        while (b != 0) {
+            int temp = b;
+            b = a % b;
+            a = temp;
+        }
+        return a;
+    }
+
+    public static void main(String[] args) {
+        new test8();
+    }
+}
+
+
 
