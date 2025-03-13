@@ -1,1 +1,71 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class test5 extends JFrame {
+    private JTextField txtSoA, txtSoB, txtUSCLN;
+    private JButton btnTimUSCLN;
+
+    public test5() {
+        setTitle("Tìm Ước Số Chung Lớn Nhất");
+        setSize(300, 200);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+        
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(4, 2, 5, 5));
+        
+        panel.add(new JLabel("Số A:"));
+        txtSoA = new JTextField();
+        panel.add(txtSoA);
+        
+        panel.add(new JLabel("Số B:"));
+        txtSoB = new JTextField();
+        panel.add(txtSoB);
+        
+        panel.add(new JLabel("Ước số chung lớn nhất:"));
+        txtUSCLN = new JTextField();
+        txtUSCLN.setEditable(false);
+        panel.add(txtUSCLN);
+        
+        btnTimUSCLN = new JButton("Tìm USCLN");
+        panel.add(btnTimUSCLN);
+        
+        btnTimUSCLN.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                timUSCLN();
+            }
+        });
+        
+        add(panel);
+    }
+    
+    private void timUSCLN() {
+        try {
+            int a = Integer.parseInt(txtSoA.getText());
+            int b = Integer.parseInt(txtSoB.getText());
+            int uscln = timUSCLNHelper(a, b);
+            txtUSCLN.setText(String.valueOf(uscln));
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập số nguyên hợp lệ!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    private int timUSCLNHelper(int a, int b) {
+        while (b != 0) {
+            int temp = b;
+            b = a % b;
+            a = temp;
+        }
+        return Math.abs(a);
+    }
+    
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            new test5().setVisible(true);
+        });
+    }
+}
 
